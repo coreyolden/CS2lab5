@@ -2,7 +2,13 @@ package edu.wmich.cs1120.la5;
 
 public class ExpressionFactory {
 
-	public static IExpression getExpression(char operator, int val1, int val2){
+	public static IExpression getExpression(char operator, int val1, int val2) {
 		
+		IExpression le = new Literal();
+		IExpression be = new BinaryExpression();
+		
+
+		return le;
+
 	}
 }

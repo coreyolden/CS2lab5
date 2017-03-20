@@ -8,47 +8,47 @@ package edu.wmich.cs1120.la5;
 import java.util.ArrayList;
 
 public class ElevationAnalyzer implements IRover {
-String analyze;
-double TotalElevation=0;
+	String analyze;
+	double avgElevation = 0;
 	ArrayList<IArea> squares = new ArrayList<IArea>();
+
 	public ArrayList<IArea> getPath() {
-		
+
 		return squares;
 	}
 
-	
 	public void setPath(ArrayList<IArea> path) {
+
 		squares = path;
-		
+
 	}
 
-	
 	public void analyzePath() {
-		
-		for (int i=0; i<squares.size(); i++){
-		
-		TotalElevation +=squares.get(i).getElevation();
+
+		for (int i = 0; i < squares.size(); i++) {
+
+			avgElevation += squares.get(i).getElevation();
+
 		}
-		
-		
+
+		avgElevation = (avgElevation / squares.size());
+
 	}
 
-	
 	public String getAnalysis() {
-		analyze = tostring() + Double.toString(TotalElevation);
+
+		analyze = tostring() + Double.toString(avgElevation);
 		return analyze;
+
 	}
 
-	
 	public void setAnalysis(String analysis) {
-	
-		
+
 	}
 
-	
 	public String tostring() {
-		
-		return "Total Elevation: ";
+
+		return "Average Elevation: ";
 	}
 
 }

@@ -2,42 +2,51 @@ package edu.wmich.cs1120.la5;
 
 import java.util.ArrayList;
 
-public class RadiationAnalyzer implements IRover{
+public class RadiationAnalyzer implements IRover {
 
-	@Override
+	String analyze;
+	double TotalRadiation = 0;
+	ArrayList<IArea> squares = new ArrayList<IArea>();
+
+	
 	public ArrayList<IArea> getPath() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return squares;
+		
 	}
 
-	@Override
 	public void setPath(ArrayList<IArea> path) {
-		// TODO Auto-generated method stub
 		
+		squares = path;
+
 	}
 
-	@Override
 	public void analyzePath() {
-		// TODO Auto-generated method stub
-		
+
+		for (int i = 0; i < squares.size(); i++) {
+
+			TotalRadiation += squares.get(i).getRadiation();
+			
+		}
+
 	}
 
-	@Override
 	public String getAnalysis() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setAnalysis(String analysis) {
-		// TODO Auto-generated method stub
+		
+		analyze = tostring() + Double.toString(TotalRadiation);
+		return analyze;
 		
 	}
 
-	@Override
+	public void setAnalysis(String analysis) {
+		
+		
+	}
+
 	public String tostring() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "Total Radiation: ";
+		
 	}
 
 }

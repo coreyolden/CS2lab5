@@ -8,40 +8,49 @@ import java.util.ArrayList;
 
 public class EnergyAnalyzer implements IRover {
 
+	String analyze;
+	double totalEnergy = 0;
 	ArrayList<IArea> squares = new ArrayList<IArea>();
+
+	
 	public ArrayList<IArea> getPath() {
-		
+
 		return squares;
+		
 	}
 
-	
 	public void setPath(ArrayList<IArea> path) {
+		
 		squares = path;
-		
+
 	}
 
-	
 	public void analyzePath() {
-		// TODO Auto-generated method stub
-		
+
+		for (int i = 0; i < squares.size(); i++) {
+
+			totalEnergy += squares.get(i).getBasicEnergyCost();
+			
+		}
+
 	}
 
-	
 	public String getAnalysis() {
 		
-		return null;
-	}
-
-	
-	public void setAnalysis(String analysis) {
-		// TODO Auto-generated method stub
+		analyze = tostring() + Double.toString(totalEnergy);
+		return analyze;
 		
 	}
 
-	
+	public void setAnalysis(String analysis) {
+		
+		
+	}
+
 	public String tostring() {
-		// TODO Auto-generated method stub
-		return analyze;
+
+		return "Total Energy Cost: ";
+		
 	}
 
 }
