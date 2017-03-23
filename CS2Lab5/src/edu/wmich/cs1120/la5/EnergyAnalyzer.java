@@ -44,7 +44,7 @@ public class EnergyAnalyzer implements IRover {
 
 	public void setAnalysis(String analysis) {
 		
-		
+		analysis = analyze;
 	}
 
 	public String tostring() {

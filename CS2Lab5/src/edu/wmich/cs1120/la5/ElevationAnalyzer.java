@@ -44,6 +44,8 @@ public class ElevationAnalyzer implements IRover {
 
 	public void setAnalysis(String analysis) {
 
+		analysis = analyze;
+		
 	}
 
 	public String tostring() {

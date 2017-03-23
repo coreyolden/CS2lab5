@@ -13,8 +13,9 @@ public class MapCreatorFromDat implements IMapCreator {
 	Integer rightNum;
 	char operand;
 	private TerrainScanner scan = new TerrainScanner();
-	private ExpressionFactory ef = new ExpressionFactory();
 	Integer operationNum;
+	Integer seekNum;
+	
 	/*
 	 * I'm using this to check if the operation numbers end with -1 or not.
 	 * Still need to set it equal to the values of addition or subtraction
@@ -41,14 +42,15 @@ public class MapCreatorFromDat implements IMapCreator {
 					leftNum = file.readInt();
 					rightNum = file.readInt();
 
-					ExpressionFactory.getExpression(operand, leftNum, rightNum);
+					operationNum = ExpressionFactory.getExpression(operand, leftNum, rightNum).getValue();
+					seekNum = operationNum * 34;
 					/*
 					 * Not sure where to go from here with all of these classes.
 					 * I THINK everything else should work fine, we just need to
 					 * complete the operations to iterate through the file.
 					 */
 
-					if (radiation >= .5 || (radiation < .5 && elevation < (threshold * .5))) {
+					if (radiation >= .5 || (radiation < .5 && elevation > (threshold * .5))) {
 
 						area[r][c] = new HighArea();
 						area[r][c].setBasicEnergyCost(energyCost);
@@ -70,7 +72,7 @@ public class MapCreatorFromDat implements IMapCreator {
 
 					} else {
 
-						file.seek(operationNum);
+						file.seek(seekNum);
 
 					}
 

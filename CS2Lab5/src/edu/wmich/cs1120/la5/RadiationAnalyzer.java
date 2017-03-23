@@ -40,6 +40,7 @@ public class RadiationAnalyzer implements IRover {
 
 	public void setAnalysis(String analysis) {
 		
+		analysis = analyze;
 		
 	}
 
