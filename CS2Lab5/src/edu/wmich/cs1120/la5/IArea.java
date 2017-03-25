@@ -1,11 +1,39 @@
 package edu.wmich.cs1120.la5;
 
 public interface IArea {
-double getBasicEnergyCost();
-void setBasicEnergyCost(double basicEnergyCost);
-double getElevation();
-void setElevation(double elevation);
-double getRadiation();
-void setRadiation(double radiation);
-double calcConsumedEnergy();
+
+	/**
+	 * @return basicEnergyCost
+	 */
+	double getBasicEnergyCost();
+
+	/**
+	 * @param basicEnergyCost
+	 */
+	void setBasicEnergyCost(double basicEnergyCost);
+
+	/**
+	 * @return Elevation
+	 */
+	double getElevation();
+
+	/**
+	 * @param elevation
+	 */
+	void setElevation(double elevation);
+
+	/**
+	 * @return Radiation
+	 */
+	double getRadiation();
+
+	/**
+	 * @param radiation
+	 */
+	void setRadiation(double radiation);
+
+	/**
+	 * @return ConsumedEnergy
+	 */
+	double calcConsumedEnergy();
 }

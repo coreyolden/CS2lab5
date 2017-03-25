@@ -4,10 +4,35 @@ import java.util.ArrayList;
 
 public interface IRover {
 
-ArrayList<IArea> getPath();
-void setPath(ArrayList<IArea> path);
-void analyzePath();
-String getAnalysis();
-void setAnalysis(String analysis);
-String tostring();
+	/**
+	 * 
+	 * @return IArea arraylist
+	 */
+	ArrayList<IArea> getPath();
+
+	/**
+	 * @param path
+	 */
+	void setPath(ArrayList<IArea> path);
+
+	/**
+	 * does math here
+	 */
+	void analyzePath();
+
+	/**
+	 * @return String
+	 */
+	String getAnalysis();
+
+	/**
+	 * @param analysis
+	 */
+	void setAnalysis(String analysis);
+
+	/**
+	 * @return String
+	 */
+	String tostring();
+	
 }

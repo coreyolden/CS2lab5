@@ -6,21 +6,65 @@ import java.io.RandomAccessFile;
 
 public class MapCreatorFromDat implements IMapCreator {
 
-	double radiation;
-	double energyCost;
-	double elevation;
-	Integer leftNum;
-	Integer rightNum;
-	char operand;
-	private TerrainScanner scan = new TerrainScanner();
-	Integer operationNum;
-	Integer seekNum;
-	
-	/*
-	 * I'm using this to check if the operation numbers end with -1 or not.
-	 * Still need to set it equal to the values of addition or subtraction
+	/**
+	 * radiation holds the double value of radiation read from the .dat file
 	 */
+	private double radiation;
 
+	/**
+	 * energyCost holds the double value of energyCost read from the .dat file
+	 */
+	private double energyCost;
+
+	/**
+	 * elevation holds the double value of elevation read from the .dat file
+	 */
+	private double elevation;
+
+	/**
+	 * leftNum holds the value of the first integer read from the .dat file in
+	 * order to complete the operation
+	 */
+	private Integer leftNum;
+
+	/**
+	 * rightNum holds the value of the second integer read from the .dat file in
+	 * order to complete the operation
+	 */
+	private Integer rightNum;
+
+	/**
+	 * operand holds the value of the character read from the .dat file in order
+	 * to complete the operation
+	 */
+	private char operand;
+
+	/**
+	 * scan holds the value of the TerrainScanner object that is instantiated
+	 * here
+	 */
+	private TerrainScanner scan = new TerrainScanner();
+
+	/**
+	 * operationNum holds the value of the result of the operation
+	 */
+	private Integer operationNum;
+
+	/**
+	 * seekNum holds the value of the result of multiplying operationNum by the
+	 * number of bytes we are searching for
+	 */
+	private Integer seekNum;
+
+	/**
+	 * scanTerrain is the class where data is read from the .dat file and input
+	 * into the correct values throughout the program. More information about
+	 * this method can be found in its multi-line comments.
+	 * 
+	 * @param fileName
+	 * @param threshold
+	 * @throws IOException
+	 */
 	@Override
 	public void scanTerrain(String fileName, int threshold) throws IOException {
 
@@ -35,6 +79,9 @@ public class MapCreatorFromDat implements IMapCreator {
 
 				try {
 
+					/*
+					 * reads all of the information we need for each iteration
+					 */
 					energyCost = file.readDouble();
 					elevation = file.readDouble();
 					radiation = file.readDouble();
@@ -42,14 +89,23 @@ public class MapCreatorFromDat implements IMapCreator {
 					leftNum = file.readInt();
 					rightNum = file.readInt();
 
-					operationNum = ExpressionFactory.getExpression(operand, leftNum, rightNum).getValue();
-					seekNum = operationNum * 34;
 					/*
-					 * Not sure where to go from here with all of these classes.
-					 * I THINK everything else should work fine, we just need to
-					 * complete the operations to iterate through the file.
+					 * sets the value of operationNum equal to the returned
+					 * value from ExpressionFactory
 					 */
+					operationNum = ExpressionFactory.getExpression(operand, leftNum, rightNum).getValue();
 
+					/*
+					 * seekNum multiples the number to seek from the operation
+					 * by the number of bytes being searched for. In this case
+					 * it is 34 bytes.
+					 */
+					seekNum = operationNum * 34;
+
+					/*
+					 * checks to see if each area square is a HighArea square or
+					 * a LowArea square
+					 */
 					if (radiation >= .5 || (radiation < .5 && elevation > (threshold * .5))) {
 
 						area[r][c] = new HighArea();
@@ -66,6 +122,11 @@ public class MapCreatorFromDat implements IMapCreator {
 
 					}
 
+					/*
+					 * if operationNum is -1, the program breaks out of the loop
+					 * as it has reached the end of the file. Else the program
+					 * searches for the next location of data
+					 */
 					if (operationNum == -1) {
 
 						break;
@@ -76,6 +137,10 @@ public class MapCreatorFromDat implements IMapCreator {
 
 					}
 
+					/*
+					 * if the EndofFileException is thrown, the program breaks
+					 * out of the loop.
+					 */
 				} catch (EOFException e) {
 
 					break;
@@ -86,11 +151,19 @@ public class MapCreatorFromDat implements IMapCreator {
 
 		}
 
+		/*
+		 * closes the file that was read and passes the array of High and Low
+		 * area squares to the TerrainScanner class
+		 */
 		file.close();
 		scan.setTerrain(area);
 
 	}
 
+	/**
+	 * getScanner returns the private field scan that holds the information of
+	 * the TerrainScanner object
+	 */
 	@Override
 	public TerrainScanner getScanner() {
 
@@ -98,6 +171,10 @@ public class MapCreatorFromDat implements IMapCreator {
 
 	}
 
+	/**
+	 * setScanner sets the private field scan equal to the TerrainScanner
+	 * scanner parameter
+	 */
 	@Override
 	public void setScanner(TerrainScanner scanner) {
 
